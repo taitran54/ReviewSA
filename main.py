@@ -1,6 +1,6 @@
 from fastapi import FastAPI
-from joblib import load
-from underthesea import word_tokenize
+# from joblib import load
+# from underthesea import word_tokenize
 
 app = FastAPI()
 
