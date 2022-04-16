@@ -2,19 +2,20 @@ from fastapi import FastAPI
 from joblib import load
 from pyvi import ViTokenizer
 from typing import Optional
+import time
 
 model_path = r'Lib/model/'
 sample_sentence = r'Sản phẩm này tệ quá.'
-print(ViTokenizer.tokenize(sample_sentence)) #Test done
+# print(ViTokenizer.tokenize(sample_sentence)) #Test done
 
 #import model tokenize
 word2vec_model = load(model_path + 'to_vector.pkl')
 word2vec_model.decode_error = 'ignore'
-temp = word2vec_model.transform([sample_sentence]) #Test done
+# temp = word2vec_model.transform([sample_sentence]) #Test done
 
 #Import model classify
 classify_model = load(model_path + 'my_modelSA.pkl')
-print (classify_model.predict(temp)) #Test done
+# print (classify_model.predict(temp)) #Test done
 
 def predict_data(list_sentences):
     '''
@@ -31,7 +32,7 @@ def predict_data(list_sentences):
     # Tokenize for Vietnamese
     for i in range(len(list_sentences)):
         list_sentences[i] = ViTokenizer.tokenize(list_sentences[i])
-    
+    print (list_sentences)
     # Word to Vec
     X = word2vec_model.transform(list_sentences)
 
@@ -51,21 +52,30 @@ app = FastAPI()
 
 @app.get("/reviewsa/")
 def check_review(sentence: Optional[str] = None):
-    if sentence:
-        # print (sentence)
-        clasify = predict_data([sentence])
-        # print (clasify)
-
-        if clasify:
-
-            return { 'Predict class:' : int(clasify[0]),
-                    'Status': 'Success' }
+    start_time = time.time()
+    try:
         
+        if sentence:
+            print (sentence)
+            clasify = predict_data([sentence])
+            # print (clasify)
+
+            if clasify:
+                result = { 'Predict class:' : int(clasify[0]),
+                        'Status': 'Success' }
+            
+            else:
+                result = { 'Status' : 'Error' }
         else:
-            return { 'Status' : 'Error' }
-    else:
-        return { 'Status' : 'Error',
-                 'Message' : 'Invalid get parameters' }
+            result =  { 'Status' : 'Error',
+                        'Message' : 'Invalid get parameters' }
+    except:
+        result =  { 'Status' : 'Error',
+                    'Message' : 'Something went wrong' } 
+    finally:
+        end_time = time.time()
+        result['Respone time'] = end_time - start_time
+        return result
 
 @app.get("/")
 async def root():
