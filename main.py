@@ -50,7 +50,7 @@ def predict_data(list_sentences):
 
 app = FastAPI()
 
-@app.get("/reviewsa/")
+@app.get("/reviewsa")
 def check_review(sentence: Optional[str] = None):
     start_time = time.time()
     try:
