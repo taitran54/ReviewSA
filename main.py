@@ -79,4 +79,12 @@ def check_review(sentence: Optional[str] = None):
 
 @app.get("/")
 async def root():
-    return {"message" : "Hello Uyên"}
+    return {"Message" : "This is an instruction",
+            "Function" : "Predict stars of review",
+            "Route" : "/reviewsa",
+            "Full link" : "https://reviewsafastapi.et.r.appspot.com/reviewsa",
+            "Method" : "GET",
+            "Query Params" : 
+                { "sentence" : 
+                    { "type" : "String", 
+                      "note" : "Your review which need to predict"} } }
