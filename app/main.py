@@ -1,10 +1,10 @@
-from fastapi import FastAPI
+from fastapi import FastAPI, Request
 from joblib import load
 from pyvi import ViTokenizer
 from typing import Optional
 import time
 
-model_path = r'Lib/model/'
+model_path = r'./Lib/model/'
 sample_sentence = r'Sản phẩm này tệ quá.'
 # print(ViTokenizer.tokenize(sample_sentence)) #Test done
 
@@ -17,7 +17,7 @@ word2vec_model.decode_error = 'ignore'
 classify_model = load(model_path + 'my_modelSA.pkl')
 # print (classify_model.predict(temp)) #Test done
 
-def predict_data(list_sentences):
+async def predict_data(list_sentences):
     '''
     Function predict list of sentence, consist steps:
         . Re-process
@@ -51,13 +51,13 @@ def predict_data(list_sentences):
 app = FastAPI()
 
 @app.get("/reviewsa")
-def check_review(sentence: Optional[str] = None):
+async def check_review(sentence: Optional[str] = None):
     start_time = time.time()
     try:
         
         if sentence:
-            print (sentence)
-            clasify = predict_data([sentence])
+            # print (sentence)
+            clasify = await predict_data([sentence])
             # print (clasify)
 
             if clasify:
@@ -77,6 +77,28 @@ def check_review(sentence: Optional[str] = None):
         result['Respone time'] = end_time - start_time
         return result
 
+@app.get("/reviewlist")
+async def predict_list(request : Request = {'sentences' : []}):
+    start_time = time.time()
+    try:
+        request = await request.json()
+        list_sentences = request['sentences']
+        print('list_sentences')
+        result = { 'Message' : list_sentences }
+
+    except:
+        result =  { 'Status' : 'Error',
+                    'Message' : 'Something went wrong' } 
+    finally:
+        end_time = time.time()
+        result['Respone time'] = end_time - start_time
+        return result
+
+@app.get("/test")
+async def test(list_test : Request):
+    print(await list_test.json())
+    return { "Message" : "Test done" }
+
 @app.get("/")
 async def root():
     return {"Message" : "This is an instruction",
@@ -88,3 +110,4 @@ async def root():
                 { "sentence" : 
                     { "type" : "String", 
                       "note" : "Your review which need to predict"} } }
+    # return { "Message" : "Hello World" }
