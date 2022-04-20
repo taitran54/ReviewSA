@@ -1,5 +1,5 @@
 from fastapi import FastAPI, Request
-from fastapi.middleware.core import CORSMiddleware
+from fastapi.middleware.cors import CORSMiddleware
 from typing import Optional
 import time, asyncio
 
@@ -8,20 +8,20 @@ from .modules.sentiment import predict_data
 from .routers import review
 app = FastAPI()
 
-# origins = [
-#     "http://localhost.tiangolo.com",
-#     "https://localhost.tiangolo.com",
-#     "http://localhost",
-#     "http://localhost:3000",
-# ]
+origins = [
+    "http://localhost.tiangolo.com",
+    "https://localhost.tiangolo.com",
+    "http://localhost",
+    "http://localhost:3000",
+]
 
-# app.add_middleware(
-#     CORSMiddleware,
-#     allow_origins=origins,
-#     allow_credentials=True,
-#     allow_methods=["*"],
-#     allow_headers=["*"],
-# )
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=origins,
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 
 app.include_router(review.router)
 
