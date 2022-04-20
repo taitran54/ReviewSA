@@ -3,5 +3,5 @@ handlers:
 - url: /
   static_dir: /
   http_headers:
-   Access-Control-Allow-Origin: 'https://reviewsafastapi.et.r.appspot.com/'
+   Access-Control-Allow-Origin: '*'
 entrypoint: gunicorn -w 4 -k uvicorn.workers.UvicornWorker app.main:app
