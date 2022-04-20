@@ -1,7 +1,7 @@
 runtime: python39
 handlers:
-- url: /fonts
-  static_dir: fonts
-  http_headers:
-    Access-Control-Allow-Origin: "*"
+  - url: /*
+    script: auto
+    http_headers:
+      Access-Control-Allow-Origin: *
 entrypoint: gunicorn -w 4 -k uvicorn.workers.UvicornWorker app.main:app
