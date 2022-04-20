@@ -22,9 +22,9 @@ async def root():
     # return {"Message" : "This is an instruction",
     #         "Function" : "Predict stars of review",
     #         "Route" : "/reviewsa",
-    #         "Full link" : "https://reviewsafastapi.et.r.appspot.com/reviewsa",
+    #         "Full_link" : "https://reviewsafastapi.et.r.appspot.com/reviewsa",
     #         "Method" : "GET",
-    #         "Query Params" : 
+    #         "Query_params" : 
     #             { "sentence" : 
     #                 { "type" : "String", 
     #                   "note" : "Your review which need to predict"} } }
