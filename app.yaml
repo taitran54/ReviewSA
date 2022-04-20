@@ -1,4 +1,5 @@
 runtime: python39
+handlers:
 - url: /.*
   script: auto
   http_headers:
