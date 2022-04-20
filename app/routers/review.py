@@ -18,7 +18,7 @@ async def check_review(sentence: Optional[str] = None):
             # print (clasify)
 
             if clasify:
-                result = { 'Predict class:' : int(clasify[0]),
+                result = { 'Predict_class:' : int(clasify[0]),
                         'Status': 'Success' }
             
             else:
@@ -45,7 +45,7 @@ async def predict_list(request : Request = {'sentences' : []}):
         pred = await predict_data(list_sentences)
         result_list = []
         for x in range(len(list_sentences)):
-            result_list.append( { "Predict class" : pred[x], "sentence" : list_sentences[x] } )
+            result_list.append( { "Predict_class" : pred[x], "sentence" : list_sentences[x] } )
 
         result['data'] = result_list
 
