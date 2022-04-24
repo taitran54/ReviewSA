@@ -33,6 +33,7 @@ async def check_review(sentence: Optional[str] = None):
     finally:
         end_time = time.time()
         result['Respone_time'] = end_time - start_time
+        print ("Done in /reivew")
         return result
 
 @router.get("/review/list")
@@ -59,4 +60,5 @@ async def predict_list(request : Request):
     finally:
         end_time = time.time()
         result['Respone_time'] = end_time - start_time
+        print ("Done in /reivew")
         return result
