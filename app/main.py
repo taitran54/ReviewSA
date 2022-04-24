@@ -3,7 +3,7 @@ from fastapi.middleware.cors import CORSMiddleware
 from typing import Optional
 import time, asyncio
 
-from .modules.sentiment import predict_data
+from .modules.kerasmodel import predict_data
 from .routers import review
 
 app = FastAPI()
@@ -30,7 +30,9 @@ async def test(list_test : Request):
     # loop = asyncio.get_event_loop()
     # loop.run_until_complete(predict_data(["Món này rất ngon"]))
     # await predict_data(["Món này rất ngon"])
-    print(await list_test.json())
+    x = await predict_data(['Món này ngon quá'])
+    print (x)
+    # print(await list_test.json())
     return { "Message" : "Test done" }
 
 @app.get("/")

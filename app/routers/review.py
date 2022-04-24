@@ -1,7 +1,7 @@
 from fastapi import APIRouter, Request
 from typing import Optional
 
-from ..modules.sentiment import predict_data
+from ..modules.kerasmodel import predict_data
 
 import time
 
@@ -36,18 +36,21 @@ async def check_review(sentence: Optional[str] = None):
         return result
 
 @router.get("/review/list")
-async def predict_list(request : Request = {'sentences' : []}):
+async def predict_list(request : Request):
     start_time = time.time()
+    
     try:
         request = await request.json()
+        
         list_sentences = request['sentences']
         # print('list_sentences')
         result = {}
         pred = await predict_data(list_sentences)
+       
         result_list = []
         for x in range(len(list_sentences)):
-            result_list.append( { "Predict_class" : pred[x], "sentence" : list_sentences[x] } )
-
+            result_list.append( { "Predict_class" : int(pred[x]), "sentence" : list_sentences[x] } )
+        print ("GOT HERE")
         result['data'] = result_list
 
     except:
