@@ -19,7 +19,8 @@ async def check_review(sentence: Optional[str] = None):
 
             if clasify:
                 result = { 'Predict_class:' : int(clasify[0]),
-                        'Status': 'Success' }
+                            'Sentence' : sentence,
+                            'Status': 'Success' }
             
             else:
                 result = { 'Status' : 'Error' }
@@ -31,7 +32,7 @@ async def check_review(sentence: Optional[str] = None):
                     'Message' : 'Something went wrong' } 
     finally:
         end_time = time.time()
-        result['Respone time'] = end_time - start_time
+        result['Respone_time'] = end_time - start_time
         return result
 
 @router.get("/review/list")
@@ -54,5 +55,5 @@ async def predict_list(request : Request = {'sentences' : []}):
                     'Message' : 'Something went wrong' } 
     finally:
         end_time = time.time()
-        result['Respone time'] = end_time - start_time
+        result['Respone_time'] = end_time - start_time
         return result

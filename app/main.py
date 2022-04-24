@@ -3,9 +3,9 @@ from fastapi.middleware.cors import CORSMiddleware
 from typing import Optional
 import time, asyncio
 
-
 from .modules.sentiment import predict_data
 from .routers import review
+
 app = FastAPI()
 
 origins = [
@@ -35,13 +35,4 @@ async def test(list_test : Request):
 
 @app.get("/")
 async def root():
-    # return {"Message" : "This is an instruction",
-    #         "Function" : "Predict stars of review",
-    #         "Route" : "/reviewsa",
-    #         "Full_link" : "https://reviewsafastapi.et.r.appspot.com/reviewsa",
-    #         "Method" : "GET",
-    #         "Query_params" : 
-    #             { "sentence" : 
-    #                 { "type" : "String", 
-    #                   "note" : "Your review which need to predict"} } }
-    return { "Message" : "Hello World" }
+    return { "Message" : "This is a main route" }

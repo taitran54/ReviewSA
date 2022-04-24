@@ -29,7 +29,7 @@ async def predict_data(list_sentences):
     # Tokenize for Vietnamese
     for i in range(len(list_sentences)):
         list_sentences[i] = ViTokenizer.tokenize(list_sentences[i])
-    print (list_sentences)
+    # print (list_sentences)
     # Word to Vec
     X = word2vec_model.transform(list_sentences)
 
