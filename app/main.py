@@ -9,8 +9,7 @@ from .routers import review
 app = FastAPI()
 
 origins = [
-    "http://localhost.tiangolo.com",
-    "https://localhost.tiangolo.com",
+    "https://nongsanmietvuon.herokuapp.com",
     "http://localhost",
     "http://localhost:3000",
 ]

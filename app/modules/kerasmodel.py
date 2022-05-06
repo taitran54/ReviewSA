@@ -63,7 +63,7 @@ async def predict_data(list_sentences):
     #Predict and scale to int [0 .. 5]
     pred = model_sentiment.predict(maxtrix_embedding)
     for y in pred:
-        result.append(np.argmax(y))
+        result.append(np.argmax(y) + 1)
     
     # print ('Run')
     return result

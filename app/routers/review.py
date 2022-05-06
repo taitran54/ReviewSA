@@ -13,27 +13,28 @@ async def check_review(sentence: Optional[str] = None):
     try:
         
         if sentence:
-            # print (sentence)
+            # print (type(sentence))
             clasify = await predict_data([sentence])
             # print (clasify)
 
             if clasify:
-                result = { 'Predict_class:' : int(clasify[0]),
-                            'Sentence' : sentence,
-                            'Status': 'Success' }
+                result = { "Predict_class:" : int(clasify[0]),
+                            "Sentence" : sentence ,
+                            "Status": "Success" }
+                # print (sentence[:])
             
             else:
-                result = { 'Status' : 'Error' }
+                result = { "Status" : "Error" }
         else:
-            result =  { 'Status' : 'Error',
-                        'Message' : 'Invalid get parameters' }
+            result =  { "Status" : "Error",
+                        "Message" : "Invalid get parameters" }
     except:
-        result =  { 'Status' : 'Error',
-                    'Message' : 'Something went wrong' } 
+        result =  { "Status" : "Error",
+                    "Message" : "Something went wrong" } 
     finally:
         end_time = time.time()
-        result['Respone_time'] = end_time - start_time
-        print ("Done in /reivew")
+        result["Respone_time"] = end_time - start_time
+        # print ("Done in /reivew")
         return result
 
 @router.get("/review/list")
@@ -55,10 +56,10 @@ async def predict_list(request : Request):
         result['data'] = result_list
 
     except:
-        result =  { 'Status' : 'Error',
-                    'Message' : 'Something went wrong' } 
+        result =  { "Status" : "Error",
+                    "Message" : "Something went wrong" } 
     finally:
         end_time = time.time()
-        result['Respone_time'] = end_time - start_time
-        print ("Done in /reivew")
+        result["Respone_time"] = end_time - start_time
+        # print ("Done in /reivew")
         return result
