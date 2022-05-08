@@ -36,4 +36,10 @@ async def test(list_test : Request):
 
 @app.get("/")
 async def root():
-    return { "Message" : "This is a main route" }
+    try: 
+        result = { "Message" : "This is a main route" }
+    
+    except:
+        result = { "Message" : "Wrong prototype" }
+    finally:
+        return result
