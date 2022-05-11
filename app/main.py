@@ -3,7 +3,7 @@ from fastapi.middleware.cors import CORSMiddleware
 from typing import Optional
 import time, asyncio
 
-from .modules.kerasmodel import predict_data
+from .modules.lstmmodel import predict_data
 from .routers import review
 
 app = FastAPI()

@@ -1,7 +1,7 @@
 from fastapi import APIRouter, Request
 from typing import Optional
 
-from ..modules.kerasmodel import predict_data
+from ..modules.lstmmodel import predict_data
 
 import time
 
@@ -52,7 +52,7 @@ async def predict_list(request : Request):
         result_list = []
         for x in range(len(list_sentences)):
             result_list.append( { "Predict_class" : int(pred[x]), "sentence" : list_sentences[x] } )
-        print ("GOT HERE")
+        # print ("GOT HERE")
         result['data'] = result_list
 
     except:
