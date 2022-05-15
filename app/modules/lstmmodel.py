@@ -11,10 +11,25 @@ model_path = r'././Lib/model/lstm/'
 with open(model_path + 'tokenizer.pickle', 'rb') as handle:
     tokenizer = pickle.load(handle)
 
-loaded_model = load_model(model_path + 'modelsLSTM.h5')
+loaded_model = load_model(model_path + 'model_lstm_class5.h5')
 
 loaded_model.build()
 loaded_model.summary()
+
+WORD_REPLACE_KHONG = ["khong", "k", "ko", "kh", "kg", "0"]
+WORD_REPLACE_DI = ["dj", "di", "ik", "đj"]
+WORD_REPLACE_GI = ["j"]
+
+def replace_word (text):
+  words = text.split()
+  for x in range (len (words)):
+    if words[x] in WORD_REPLACE_KHONG:
+      words[x] = r'không'
+    elif words[x] in WORD_REPLACE_DI:
+      words[x] = r'đi'
+    elif words[x] in WORD_REPLACE_GI:
+      words[x] = r'gìgì'
+  return str(' '.join(words) )
 
 def removeBackLoop(word):
     # print ("WORD TAG",word)
@@ -28,17 +43,17 @@ def removeBackLoop(word):
     return word[:len(word) - x]
 
 def pre_process(text):
-    temp = str(text)
-    temp = ViTokenizer.tokenize(str(temp))
-    # print ("TAG 2" ,temp)
-    temp = re.sub('[^a-zA-ZÀÁÂÃÈÉÊÌÍÒÓÔÕÙÚĂĐĨŨƠàáâãèéêìíòóôõùúăđĩũơƯĂẠẢẤẦẨẪẬẮẰẲẴẶẸẺẼỀỀỂẾưăạảấầẩẫậắằẳẵặẹẻẽềềểếỄỆỈỊỌỎỐỒỔỖỘỚỜỞỠỢỤỦỨỪễệỉịọỏốồổỗộớờởỡợụủứừỬỮỰỲỴÝỶỸửữựỳỵỷỹ_ ]+', '', temp)
-    temp = temp.split()
-    # print ("TAG 3" ,temp)
-    for x in range(len(temp)):
-        temp[x] = removeBackLoop(temp[x])
+    temp = str(text).lower()
 
-    st = str(' '.join(temp) )
-    temp = st.strip()
+    temp = removeBackLoopText(temp)
+
+    temp = ViTokenizer.tokenize(str(temp))
+    # temp = word_tokenize(str(temp), format = "text")
+
+    temp = re.sub('[^a-zA-ZÀÁÂÃÈÉÊÌÍÒÓÔÕÙÚĂĐĨŨƠàáâãèéêìíòóôõùúăđĩũơƯĂẠẢẤẦẨẪẬẮẰẲẴẶẸẺẼỀỀỂẾưăạảấầẩẫậắằẳẵặẹẻẽềềểếỄỆỈỊỌỎỐỒỔỖỘỚỜỞỠỢỤỦỨỪễệỉịọỏốồổỗộớờởỡợụủứừỬỮỰỲỴÝỶỸửữựỳỵỷỹ _]+', '', temp)
+
+    temp = replace_word (temp)
+    temp = removeBackLoopText(temp) 
 
     result = temp.split()
 
@@ -62,6 +77,14 @@ def pre_process(text):
     # print ("FINAL PREPROCESS CHECK: ", result)
     return result
 
+def removeBackLoopText(text):
+    text = text.split()
+    for x in range(len(text)):
+        text[x] = removeBackLoop(text[x])
+    text = str(' '.join(text) )
+    text = text.strip()
+    return text
+
 async def predict_data(list_sentences):
     '''
     Function predict list of sentence, consist steps:
@@ -73,7 +96,7 @@ async def predict_data(list_sentences):
     - Output: list of redict result (with result in range [0, 5] (int))
     '''
     result = []
-    max_sequences = 266
+    max_sequences = 267
     # print ("TAG CHECK 1")
     # Tokenize for Vietnamese
     for i in range(len(list_sentences)):
