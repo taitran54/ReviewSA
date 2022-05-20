@@ -1,7 +1,12 @@
-The project using fastapi on Python language
+# Wellcome to My Project
+
+- This project using fastapi on Python language
+
+- It's currently working on: http://103.153.75.102:5000/ with some routes:
 
 
-Steps to follow to run the project on WINDOWS:
+
+- Steps to follow to run the project on WINDOWS:
 
     // This command to install virtualenv
     pip install virtualenv
