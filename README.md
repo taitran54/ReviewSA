@@ -63,4 +63,9 @@
     - "\review\list" **GET** 1-unit (1 positive, 1 negative)
  
 
+```diff
+- NOTE THAT: if unit tests do not going through with high reponse_time json reponse
+-            your hardware device may be not enough for working with Neural Network model.
+```
+
 ***THAT ALL, THANK YOU FOR YOUR VISITING :slightly_smiling_face:***
