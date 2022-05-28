@@ -1,7 +1,7 @@
 from pyvi import ViTokenizer
 from keras.preprocessing.sequence import pad_sequences
 from keras.models import load_model
-import pickle
+import pickle, time
 
 import re
 import numpy as np
@@ -28,7 +28,7 @@ def replace_word (text):
     elif words[x] in WORD_REPLACE_DI:
       words[x] = r'đi'
     elif words[x] in WORD_REPLACE_GI:
-      words[x] = r'gìgì'
+      words[x] = r'gì'
   return str(' '.join(words) )
 
 def removeBackLoop(word):
@@ -53,7 +53,6 @@ def pre_process(text):
     temp = re.sub('[^a-zA-ZÀÁÂÃÈÉÊÌÍÒÓÔÕÙÚĂĐĨŨƠàáâãèéêìíòóôõùúăđĩũơƯĂẠẢẤẦẨẪẬẮẰẲẴẶẸẺẼỀỀỂẾưăạảấầẩẫậắằẳẵặẹẻẽềềểếỄỆỈỊỌỎỐỒỔỖỘỚỜỞỠỢỤỦỨỪễệỉịọỏốồổỗộớờởỡợụủứừỬỮỰỲỴÝỶỸửữựỳỵỷỹ _]+', '', temp)
 
     temp = replace_word (temp)
-    temp = removeBackLoopText(temp) 
 
     result = temp.split()
 
@@ -95,6 +94,8 @@ async def predict_data(list_sentences):
     - Input: list of sentences
     - Output: list of redict result (with result in range [0, 5] (int))
     '''
+    start_time = time.time()
+    print ("TAG LEN SENTENCES - ", len(list_sentences))
     result = []
     max_sequences = 267
     # print ("TAG CHECK 1")
@@ -103,15 +104,21 @@ async def predict_data(list_sentences):
         list_sentences[i] = pre_process(list_sentences[i])
         # print ("Preprocess success: ", list_sentences[i])
     # print (list_sentences)
+
+    print ("TAG PREPROCESSING TIME - ", time.time() - start_time)
+
     predict_data = tokenizer.texts_to_sequences(list_sentences)
 
     # maxtrix_embedding = np.expand_dims(predict_data, axis=0)
     predict_data = pad_sequences(predict_data, maxlen=max_sequences, dtype='int32', value=0)
 
     #Predict and scale to int [0 .. 5]
+    start_predict_time = time.time()
     pred = loaded_model.predict(predict_data)
     for y in pred:
         result.append(np.argmax(y) + 1)
     
+    print ("TAG PREDICT TIME - ", time.time() - start_predict_time)
+    print ("TAG PROCESS TIME - ", time.time() - start_time)
     print ('Thanks for using LSTM model')
     return result
