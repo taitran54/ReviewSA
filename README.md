@@ -2,6 +2,7 @@
 
 - The main goal of this project for predict review about agricultural in 5 starts boundary. :melon::ear_of_rice::grapes:
 - This project using fastapi on Python language, The model was trained for Sentiment Analysis problem.
+- Unit tests are also consisted.
 
 - It's currently working on: http://103.153.75.102:5000/ with some routes:
     - "/review" **GET** method: get a prediction for one review.
@@ -36,7 +37,10 @@
 
         // Install librarys
         pip install -r requirements.txt --no-cache-dir
-
+        
+        // (Optional) Run unit tests - check all things are stay in form.
+        pytest
+        
         // Run project
         uvicorn app.main:app
         // Now your API running on http://127.0.0.1:8000
@@ -44,4 +48,18 @@
         // If you wanna use hot reload function, follow /// the pattern
         uvicorn app.main:app --reload
     ```   
+ 
+ - To run unit tests, make sure virtualenv was installed
+    ```
+        venv\Scripts\activate
+        
+        pip install -r requirements.txt --no-cache-dir
+        
+        pytest
+    ```
+- Currently, unit tests consist 3 units for 3 route:
+    - "\" **GET** 1-unit (1 positive)
+    - "\review" **GET** 1-unit (1 positive)
+    - "\review\list" **GET** 1-unit (1 positive)
+ 
 ***THAT ALL, THANK YOU FOR YOUR VISITING :slightly_smiling_face:***
