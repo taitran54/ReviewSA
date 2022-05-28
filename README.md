@@ -57,9 +57,10 @@
         
         pytest
     ```
-- Currently, unit tests consist 3 units for 3 route:
+- Currently, unit tests consist 5 units for 3 route:
     - "\" **GET** 1-unit (1 positive)
-    - "\review" **GET** 1-unit (1 positive)
-    - "\review\list" **GET** 1-unit (1 positive)
+    - "\review" **GET** 2-unit (1 positive, 1 negative)
+    - "\review\list" **GET** 1-unit (1 positive, 1 negative)
  
+
 ***THAT ALL, THANK YOU FOR YOUR VISITING :slightly_smiling_face:***
