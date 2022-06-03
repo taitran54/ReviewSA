@@ -9,7 +9,7 @@ def test_review():
     assert response.status_code == 200
     assert response.json()['Status'] == "Success"
     assert response.json()['Predict_class'] >= 1
-    assert response.json()['Respone_time'] <= 3
+    assert response.json()['Respone_time'] <= 5
 
 def test_review_bad_params():
     response = client.get("/review?sen='Món này ngon'")
