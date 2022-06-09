@@ -1,0 +1,62 @@
+{
+	"info": {
+		"_postman_id": "c74aff29-90d2-46cb-84b6-3f67c1966d2f",
+		"name": "ReviewSA",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "13488160"
+	},
+	"item": [
+		{
+			"name": "https://reviewsa.space/review/list",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{ \"sentences\":[\"Món này khá ổn đấy\" , \"Món này ngon tuyệt\",\"Thúi \",\"Dở \", \"Quá tệ, không giống với mô tả\", \"Tạm ổn\", \"Khá ngon\", \"Ngon, lần sau sẽ ủng hộ shop dài\"] }"
+				},
+				"url": {
+					"raw": "https://reviewsa.space/review/list",
+					"protocol": "https",
+					"host": [
+						"reviewsa",
+						"space"
+					],
+					"path": [
+						"review",
+						"list"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "https://reviewsa.space/review?sentence=\"không ngon\"",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://reviewsa.space/review?sentence=\"không ngon\"",
+					"protocol": "https",
+					"host": [
+						"reviewsa",
+						"space"
+					],
+					"path": [
+						"review"
+					],
+					"query": [
+						{
+							"key": "sentence",
+							"value": "\"không ngon\""
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
