@@ -3,6 +3,7 @@
 - The main goal of this project for predict review about agricultural in 5 starts boundary. :melon::ear_of_rice::grapes:
 - This project using fastapi on Python language, The model was trained for Sentiment Analysis problem.
 - Unit tests are also consisted.
+- You can find postman JSON test file.
 
 - It's currently working on: https://reviewsa.space with some routes:
     - "/review" **GET** method: get a prediction for one review.
@@ -11,6 +12,7 @@
      { "sentence": "a review in Vietnamese language." }
      ```
      Result: a JSON which consist a result.
+     Here is fast test link [https://reviewsa.space/review?sentence="không ngon"]
     - "/review/list" **GET** method: get a prediction for list of reviews.
       Require a raw text body which is formed in JSON { "sentences" : ["Review A, "Review B"] }
       Result: a JSON which consist predict starts for per sentences in form: 
@@ -22,6 +24,7 @@
           "sentences" : "Review B" }]}
     ```
 
+    
 - Steps to follow to run the project on WINDOWS:
     ```
         //This command to install virtualenv
