@@ -3,7 +3,7 @@
 - The main goal of this project for predict review about agricultural in 5 starts boundary. :melon::ear_of_rice::grapes:
 - This project using fastapi on Python language, The model was trained for Sentiment Analysis problem.
 - Unit tests are also consisted.
-- You can find postman JSON test file.
+- You can find postman JSON test file in [https://github.com/taitran54/ReviewSA/blob/main/ReviewSA.postman_collection.json] which will have 2 test route with sample data.
 
 - It's currently working on: https://reviewsa.space with some routes:
     - "/review" **GET** method: get a prediction for one review.
