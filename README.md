@@ -1,5 +1,6 @@
 # Wellcome to Review SA API Project
 
+Currently, I am fixing server for serve as HTTPS instead of HTTP, so IP address link did't work as well, I will update as soon as posible.
 - The main goal of this project for predict review about agricultural in 5 starts boundary. :melon::ear_of_rice::grapes:
 - This project using fastapi on Python language, The model was trained for Sentiment Analysis problem.
 - Unit tests are also consisted.
