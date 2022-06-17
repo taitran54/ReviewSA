@@ -9,7 +9,7 @@ def test_review():
     assert response.status_code == 200
     assert response.json()['Status'] == "Success"
     assert response.json()['Predict_class'] >= 1
-    assert response.json()['Respone_time'] <= 5
+    assert response.json()['Respone_time'] <= 8
 
 def test_review_bad_params():
     response = client.get("/review?sen='Món này ngon'")
@@ -22,7 +22,7 @@ def test_test_review_list():
     response = client.get("/review/list", json = data)
     assert response.status_code == 200
     assert response.json()['Status'] == "Success"
-    assert response.json()['Respone_time'] <= 10
+    assert response.json()['Respone_time'] <= 20
     # assert response.json() == { "Message" : "This is a main route" }
 
 def test_test_review_list_bad_json():
